@@ -26,16 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
                 // parse breed objects into dataArray
                 dataArr = Object.keys(data.message);
-                dataArr.forEach(element => {
-                    let breed = document.createElement('li');
-                    breed.textContent = element;
-                    const breeds = document.querySelector('#dog-breeds');
-                    breeds.appendChild(breed);
-                });
+                const breeds = document.querySelector('#dog-breeds');
+                dataArr.forEach(element => addBreedToDOM(element, breeds));
         });
     
 
-    // select a breed from the list and change the li color
+    // grab all li elements, change individual li color if clicked
     const dogs = document.querySelectorAll('#dog-breeds');
     for (let dog of dogs) {
         dog.addEventListener('click', (e) => e.target.style.color = 'red');
@@ -54,13 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const breeds = document.querySelector('#dog-breeds');
         // clear out breedlist by setting ul to empty string
         breeds.textContent = "";
-        // append filtered array elements to breedList
-        newArr.forEach(element => {
-            let breed = document.createElement('li');
-            breed.textContent = element;
-            breeds.appendChild(breed)
-        });
+        // append filtered array elements to breeds
+        newArr.forEach(element => (addBreedToD(element, breeds)));
     }
 
+    function addBreedToDOM(breedType, breedList) {
+        let breed = document.createElement('li');
+        breed.textContent = breedType;
+        breedList.appendChild(breed);
+    }
     
 })
